@@ -27,7 +27,8 @@ exports.createBook = (req, res) => {
   const newBook = {
     id: Date.now(),
     title: req.body.title,
-    author: req.body.author
+    author: req.body.author,
+    year: req.body.year
   };
   books.push(newBook);
   saveBooks(books);

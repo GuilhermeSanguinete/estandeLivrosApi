@@ -1,22 +1,20 @@
 [
   {
-    "id": 1753227494959,
-    "title": "Dom Casmurro",
-    "author": "Machado de Assis"
-  },
-  {
-    "id": 1753227501706,
+    "id": 1753550083048,
     "title": "1984",
-    "author": "George Orwell"
+    "author": "George Orwell",
+    "year": 1979
   },
   {
-    "id": 1753227507029,
-    "title": "A Revolução dos Bichos",
-    "author": "George Orwell"
+    "id": 1753550090862,
+    "title": "Dom Casmurro",
+    "author": "Machado de Assis",
+    "year": 1899
   },
   {
-    "id": 1753227512612,
-    "title": "O Pequeno Príncipe",
-    "author": "Antoine de Saint-Exupéry"
+    "id": 1753550095655,
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "year": 2008
   }
 ]
