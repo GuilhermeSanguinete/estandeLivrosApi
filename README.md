@@ -34,7 +34,7 @@ book-api/
 ## ▶️ Como executar
 
 1. Clone o repositório:
-git clone https://github.com/seu-usuario/estandeLivrosApi.git
+git clone https://github.com/GuilhermeSanguinete/estandeLivrosApi.git
 cd estandeLivrosApi
 
 2. Instale as dependências:
