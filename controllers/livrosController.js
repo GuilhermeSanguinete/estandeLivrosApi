@@ -7,7 +7,7 @@ function loadBooks() {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
   }
   catch (ex) {
-    console.error("Erro ao carregar livros:", ex.message)
+    console.error("Erro ao carregar livros:", ex.message);
   }
 }
 
@@ -15,21 +15,31 @@ function saveBooks(books) {
   try {
     fs.writeFileSync(filePath, JSON.stringify(books, null, 2));
   }
-  catch(ex){
-    console.error("Erro ao salvar livro", ex.message)
+  catch (ex) {
+    console.error("Erro ao salvar livro:", ex.message);
   }
 }
 
 exports.getAllBooks = (req, res) => {
-  const books = loadBooks();
-  res.json(books);
+  try {
+    const books = loadBooks();
+    res.json(books);
+  }
+  catch (ex) {
+    console.error("Erro ao buscar livros:", ex.message);
+  }
 };
 
 exports.getBookById = (req, res) => {
-  const books = loadBooks();
-  const book = books.find(b => b.id === parseInt(req.params.id));
-  if (!book) return res.status(404).json({ message: 'Livro não encontrado' });
-  res.json(book);
+  try {
+    const books = loadBooks();
+    const book = books.find(b => b.id === parseInt(req.params.id));
+    if (!book) return res.status(404).json({ message: 'Livro não encontrado' });
+    res.json(book);
+  }
+  catch(ex){
+    console.error("Erro ao buscar livros por id:", ex.message);
+  }
 };
 
 exports.createBook = (req, res) => {
