@@ -37,40 +37,55 @@ exports.getBookById = (req, res) => {
     if (!book) return res.status(404).json({ message: 'Livro não encontrado' });
     res.json(book);
   }
-  catch(ex){
+  catch (ex) {
     console.error("Erro ao buscar livros por id:", ex.message);
   }
 };
 
 exports.createBook = (req, res) => {
-  const books = loadBooks();
-  const newBook = {
-    id: Date.now(),
-    title: req.body.title,
-    author: req.body.author,
-    year: req.body.year
-  };
-  books.push(newBook);
-  saveBooks(books);
-  res.status(201).json(newBook);
+  try {
+    const books = loadBooks();
+    const newBook = {
+      id: Date.now(),
+      title: req.body.title,
+      author: req.body.author,
+      year: req.body.year
+    };
+    books.push(newBook);
+    saveBooks(books);
+    res.status(201).json(newBook);
+  }
+  catch (ex) {
+    console.error("Erro ao cadastrar novo livro", ex.message);
+  }
 };
 
 exports.updateBook = (req, res) => {
-  const books = loadBooks();
-  const index = books.findIndex(b => b.id === parseInt(req.params.id));
-  if (index === -1) return res.status(404).json({ message: 'Livro não encontrado' });
+  try {
+    const books = loadBooks();
+    const index = books.findIndex(b => b.id === parseInt(req.params.id));
+    if (index === -1) return res.status(404).json({ message: 'Livro não encontrado' });
 
-  books[index] = { ...books[index], ...req.body };
-  saveBooks(books);
-  res.json(books[index]);
+    books[index] = { ...books[index], ...req.body };
+    saveBooks(books);
+    res.json(books[index]);
+  }
+  catch (ex) {
+    console.error("Erro ao alterar livro:", ex.message);
+  }
 };
 
 exports.deleteBook = (req, res) => {
-  let books = loadBooks();
-  const index = books.findIndex(b => b.id === parseInt(req.params.id));
-  if (index === -1) return res.status(404).json({ message: 'Livro não encontrado' });
+  try {
+    let books = loadBooks();
+    const index = books.findIndex(b => b.id === parseInt(req.params.id));
+    if (index === -1) return res.status(404).json({ message: 'Livro não encontrado' });
 
-  const deleted = books.splice(index, 1);
-  saveBooks(books);
-  res.json(deleted[0]);
+    const deleted = books.splice(index, 1);
+    saveBooks(books);
+    res.json(deleted[0]);
+  }
+  catch (ex) {
+    console.error("Erro ao deletar livro da estante", ex.message);
+  }
 };
