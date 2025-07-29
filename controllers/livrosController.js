@@ -3,11 +3,21 @@ const path = require('path');
 const filePath = path.join(__dirname, '../data/livros.json');
 
 function loadBooks() {
-  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  }
+  catch (ex) {
+    console.error("Erro ao carregar livros:", ex.message)
+  }
 }
 
 function saveBooks(books) {
-  fs.writeFileSync(filePath, JSON.stringify(books, null, 2));
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(books, null, 2));
+  }
+  catch(ex){
+    console.error("Erro ao salvar livro", ex.message)
+  }
 }
 
 exports.getAllBooks = (req, res) => {
